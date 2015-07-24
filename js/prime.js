@@ -1,4 +1,4 @@
-findPrimes: function(givenNumber) {
+var findPrimes = function(givenNumber) {
   var lastCheck = Math.ceil(Math.sqrt(givenNumber)),
       primeFactor = 2,
       primeCandidates = [],
@@ -12,11 +12,11 @@ findPrimes: function(givenNumber) {
   }
 
   while (primeFactor < lastCheck) {
-    primeCandidates.each(candidate) {
-      if (candidate % primeFactor !== 0){
-        remainingCandidates.push(candidate);
+    primeCandidates.forEach(function(primeCandidate) {
+      if (primeCandidate % primeFactor !== 0){
+        remainingCandidates.push(primeCandidate);
       }
-    };
+    });
     firstPrimes.push(primeFactor);
     primeCandidates = remainingCandidates;
     remainingCandidates = [];
@@ -25,3 +25,14 @@ findPrimes: function(givenNumber) {
   primes = firstPrimes.concat(primeCandidates);
   return primes;
 };
+
+
+$(document).ready(function() {
+  $("form#prime").submit(function(event) {
+    event.preventDefault();
+    var number = parseInt($("input#givenNumber").val());
+    var thePrimes = findPrimes(number);
+
+    $(".answer").text(thePrimes);
+  });
+});
